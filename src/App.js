@@ -8,6 +8,7 @@ import { Header } from './components/header';
 import { ProductDetail } from './pages/productDetail';
 import { Banner } from './components/banner';
 import { ProductList } from './components/productList';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
@@ -17,8 +18,7 @@ function App() {
       <ProductList />
       <BrowserRouter>
         <Routes>
-          <Route path="/detail" element={<ProductDetail />}>
-          </Route>
+          <Route path="/product/:1" element={<ProductDetail />}/>
         </Routes>
       </BrowserRouter>
     </div>
