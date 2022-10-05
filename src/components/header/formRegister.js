@@ -1,11 +1,12 @@
-import { Button, DatePicker, Form, Input, Select } from 'antd';
+import { Button, DatePicker, Form, Input, Select, notification  } from 'antd';
 import axios from 'axios';
 import React from 'react';
 import { URL_API } from '../../utils/common';
 const { Option } = Select;
 
-export const FormRegister = () => {
+export const FormRegister = (props) => {
 
+  const { setIsOpenFormRegister } = props;
   const [form] = Form.useForm();
 
   const onDobChange = (date, dateString) => {
@@ -41,12 +42,14 @@ export const FormRegister = () => {
     axios.post(`${URL_API}/User/register-user`, payload)
       .then(res => {
         // register success
+        if(res.success) {
+          notification.open({
+            message: 'Bạn đã đăng ký thành công',
+          });
+          setIsOpenFormRegister(false);
+        }
       })
       .catch(error => console.log(error));
-  };
-
-  const onFinishFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo);
   };
 
   return (
@@ -54,7 +57,6 @@ export const FormRegister = () => {
       name="basic"
       layout="vertical"
       onFinish={onFinish}
-      onFinishFailed={onFinishFailed}
       autoComplete="off"
     >
       <Form.Item
