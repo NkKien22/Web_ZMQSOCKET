@@ -93,7 +93,7 @@ export const Header = () => {
         </div>
       </div>
       <Modal title="Đăng nhập" open={isOpenFormLogin} onCancel={handleCancelLogin} footer={null}>
-        <FormLogin />
+        <FormLogin setIsOpenFormLogin={setIsOpenFormLogin} />
       </Modal>
       <Modal title="Đăng ký" open={isOpenFormRegister} onCancel={handleCancelRegister} footer={null}>
         <FormRegister setIsOpenFormRegister={setIsOpenFormRegister} />

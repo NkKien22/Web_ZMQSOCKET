@@ -1,13 +1,25 @@
-import { Button, Form, Input } from 'antd';
+import { Button, Form, Input, notification } from 'antd';
+import axios from 'axios';
 import React from 'react';
+import { URL_API } from '../../utils/common';
 
-export const FormLogin = () => {
+export const FormLogin = (props) => {
+  const { setIsOpenFormLogin } = props;
   const onFinish = (values) => {
-    console.log('Success:', values);
-  };
-
-  const onFinishFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo);
+    const payload = {
+      username: values.username,
+      password: values.password,
+    };
+    axios.post(`${URL_API}/User/login`, payload)
+      .then(res => {
+        if(res.success) {
+          notification.open({
+            message: 'Bạn đã đăng nhập thành công',
+          });
+          setIsOpenFormLogin(false);
+        }
+      })
+      .catch(error => console.log(error));
   };
 
   return (
@@ -17,7 +29,6 @@ export const FormLogin = () => {
         remember: true,
       }}
       onFinish={onFinish}
-      onFinishFailed={onFinishFailed}
       autoComplete="off"
     >
       <Form.Item
