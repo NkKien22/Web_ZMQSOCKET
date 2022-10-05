@@ -1,25 +1,33 @@
 import { Button, Form, Input, notification } from 'antd';
 import axios from 'axios';
-import React from 'react';
+import React, { useState } from 'react';
 import { URL_API } from '../../utils/common';
 
 export const FormLogin = (props) => {
   const { setIsOpenFormLogin } = props;
+  const [loading, setLoading] = useState(false);
   const onFinish = (values) => {
+    setLoading(true);
     const payload = {
       username: values.username,
       password: values.password,
     };
     axios.post(`${URL_API}/User/login`, payload)
       .then(res => {
+        debugger
         if(res.data.success) {
-          notification.open({
+          notification.success({
             message: 'Bạn đã đăng nhập thành công',
           });
           setIsOpenFormLogin(false);
+        }else{
+          notification.error({
+            message: res.data.message
+          });
         }
       })
-      .catch(error => console.log(error));
+      .catch(error => console.log(error))
+      .finally(() => setLoading(false));
   };
 
   return (
@@ -55,7 +63,7 @@ export const FormLogin = (props) => {
         <Input.Password placeholder='Vui lòng nhập password' />
       </Form.Item>
       <Form.Item>
-        <Button type="primary" htmlType="submit">
+        <Button type="primary" htmlType="submit" loading={loading}>
           Submit
         </Button>
       </Form.Item>

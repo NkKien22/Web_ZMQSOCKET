@@ -71,6 +71,7 @@ export const FormRegister = (props) => {
       <Form.Item
         label="Username"
         name="username"
+        hasFeedback
         rules={[
           {
             required: true,
@@ -83,6 +84,7 @@ export const FormRegister = (props) => {
       <Form.Item
         label="Password"
         name="password"
+        hasFeedback
         rules={[
           {
             required: true,
@@ -91,6 +93,28 @@ export const FormRegister = (props) => {
         ]}
       >
         <Input.Password placeholder='Vui lòng nhập password' />
+      </Form.Item>
+      <Form.Item
+        name="confirm"
+        label="Confirm Password"
+        dependencies={['password']}
+        hasFeedback
+        rules={[
+          {
+            required: true,
+            message: 'Please confirm your password!',
+          },
+          ({ getFieldValue }) => ({
+            validator(_, value) {
+              if (!value || getFieldValue('password') === value) {
+                return Promise.resolve();
+              }
+              return Promise.reject(new Error('The two passwords that you entered do not match!'));
+            },
+          }),
+        ]}
+      >
+        <Input.Password />
       </Form.Item>
       <Form.Item
         name="email"
