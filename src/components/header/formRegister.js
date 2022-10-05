@@ -1,14 +1,42 @@
-import { Button, Form, Input } from 'antd';
+import { Button, DatePicker, Form, Input, Select } from 'antd';
 import axios from 'axios';
 import React from 'react';
 import { URL_API } from '../../utils/common';
+const { Option } = Select;
 
 export const FormRegister = () => {
+
+  const [form] = Form.useForm();
+
+  const onDobChange = (date, dateString) => {
+    form.setFieldsValue({
+      dob: dateString,
+    });
+  };
+
+  const onGenderChange = (value) => {
+    switch (value) {
+      case true:
+        form.setFieldsValue({
+          gender: true,
+        });
+        return;
+      case false:
+        form.setFieldsValue({
+          gender: true,
+        });
+        return;
+    }
+  };
   const onFinish = (values) => {
     const payload = {
       username: values.username,
       password: values.password,
-      role: "Normal"
+      email: values.email,
+      gender: values.gender,
+      dob: values.dob,
+      address: values.address,
+      phoneNumber: values.phoneNumber
     }
     axios.post(`${URL_API}/User/register-user`, payload)
       .then(res => {
@@ -24,14 +52,13 @@ export const FormRegister = () => {
   return (
     <Form
       name="basic"
-      initialValues={{
-        remember: true,
-      }}
+      layout="vertical"
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
       autoComplete="off"
     >
       <Form.Item
+        label="Username"
         name="username"
         rules={[
           {
@@ -43,6 +70,7 @@ export const FormRegister = () => {
         <Input placeholder='Vui lòng nhập username' />
       </Form.Item>
       <Form.Item
+        label="Password"
         name="password"
         rules={[
           {
@@ -52,6 +80,59 @@ export const FormRegister = () => {
         ]}
       >
         <Input.Password placeholder='Vui lòng nhập password' />
+      </Form.Item>
+      <Form.Item
+        name="email"
+        label="E-mail"
+        rules={[
+          {
+            type: 'email',
+            message: 'The input is not valid E-mail!',
+          },
+          {
+            required: true,
+            message: 'Please input your E-mail!',
+          },
+        ]}
+      >
+        <Input />
+      </Form.Item>
+      <Form.Item
+        name="phoneNumber"
+        label="SDT"
+        rules={[
+          {
+            required: true,
+            message: 'Please input your phone!',
+          },
+        ]}
+      >
+        <Input type='number' />
+      </Form.Item>
+      <Form.Item name="gender" label="Gender" rules={[{ required: true }]}>
+        <Select
+          placeholder="Select a option and change input text above"
+          onChange={onGenderChange}
+          allowClear
+        >
+          <Option value={true}>Nam</Option>
+          <Option value={false}>Nữ</Option>
+        </Select>
+      </Form.Item>
+      <Form.Item label="DatePicker" name="dob">
+        <DatePicker format="YYYY/MM/DD" onChange={onDobChange}/>
+      </Form.Item>
+      <Form.Item
+        label="Address"
+        name="address"
+        rules={[
+          {
+            required: true,
+            message: 'Please input your address!',
+          },
+        ]}
+      >
+        <Input placeholder='Vui lòng nhập địa chỉ' />
       </Form.Item>
       <Form.Item>
         <Button type="primary" htmlType="submit">
