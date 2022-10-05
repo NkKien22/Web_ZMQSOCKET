@@ -12,7 +12,7 @@ export const FormLogin = (props) => {
     };
     axios.post(`${URL_API}/User/login`, payload)
       .then(res => {
-        if(res.success) {
+        if(res.data.success) {
           notification.open({
             message: 'Bạn đã đăng nhập thành công',
           });
