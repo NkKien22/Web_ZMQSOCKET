@@ -9,7 +9,7 @@ const { Search } = Input;
 export const Header = () => {
   const [isOpenFormLogin, setIsOpenFormLogin] = useState(false);
   const [isOpenFormRegister, setIsOpenFormRegister] = useState(false);
-  const [alreadyLogin, setAlreadyLogin] = useState(true);
+  const [alreadyLogin, setAlreadyLogin] = useState(false);
 
   const onSearch = (value) => console.log(value);
 
