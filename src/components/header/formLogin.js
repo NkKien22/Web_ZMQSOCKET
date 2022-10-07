@@ -1,7 +1,8 @@
 import { Button, Form, Input, notification } from 'antd';
 import axios from 'axios';
 import React, { useState } from 'react';
-import { URL_API } from '../../utils/common';
+import { REFRESH_TOKEN_KEY, TOKEN_KEY, URL_API } from '../../utils/common';
+import Cookies from 'js-cookie';
 
 export const FormLogin = (props) => {
   const { setIsOpenFormLogin } = props;
@@ -14,8 +15,9 @@ export const FormLogin = (props) => {
     };
     axios.post(`${URL_API}/User/login`, payload)
       .then(res => {
-        debugger
         if(res.data.success) {
+          Cookies.set(TOKEN_KEY, res.data.item.access_token);
+          Cookies.set(REFRESH_TOKEN_KEY, res.data.item.refresh_token);
           notification.success({
             message: 'Bạn đã đăng nhập thành công',
           });
