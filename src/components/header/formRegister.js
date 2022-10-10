@@ -110,13 +110,13 @@ export const FormRegister = (props) => {
                 return Promise.resolve();
               }
               return Promise.reject(new Error('The two passwords that you entered do not match!'));
-            },
+            },                                                                                  
           }),
         ]}
       >
         <Input.Password />
       </Form.Item>
-      <Form.Item
+      {/* <Form.Item
         name="email"
         label="E-mail"
         rules={[
@@ -168,7 +168,7 @@ export const FormRegister = (props) => {
         ]}
       >
         <Input placeholder='Vui lòng nhập địa chỉ' />
-      </Form.Item>
+      </Form.Item> */}
       <Form.Item>
         <Button type="primary" htmlType="submit">
           Submit

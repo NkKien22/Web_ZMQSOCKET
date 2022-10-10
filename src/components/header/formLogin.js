@@ -18,6 +18,7 @@ export const FormLogin = (props) => {
         if(res.data.success) {
           Cookies.set(TOKEN_KEY, res.data.item.access_token);
           Cookies.set(REFRESH_TOKEN_KEY, res.data.item.refresh_token);
+          window.location.reload();
           notification.success({
             message: 'Bạn đã đăng nhập thành công',
           });
