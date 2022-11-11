@@ -51,7 +51,7 @@ export const ProductList = (props) => {
             {(dataSearch || data).map((x) => {
               return (
                 <Col>
-                  <Link to={`/product/${x.id}`}>
+                  <Link to={`/product/${x.variantID}`}>
                     <Card
                       hoverable
                       style={{ width: 200 }}
