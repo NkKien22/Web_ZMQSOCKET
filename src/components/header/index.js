@@ -1,12 +1,24 @@
 import { Dropdown, Modal, Input, Space, Menu } from "antd";
 import { PhoneOutlined, UserOutlined, DownOutlined } from "@ant-design/icons";
-import "./styles.css";
 import { useState } from "react";
 import { FormLogin } from "./formLogin";
 import { FormRegister } from "./formRegister";
 import { REFRESH_TOKEN_KEY, TOKEN_KEY, URL_API } from "../../utils/common";
 import Cookies from "js-cookie";
 import axios from "axios";
+// import "./../../assets/pages/css/components.css";
+// import "./../../assets/pages/css/slider.css";
+import "./../../assets/pages/css/style-shop.css";
+import "./../../assets/plugins/font-awesome/css/font-awesome.min.css";
+import "./../../assets/plugins/bootstrap/css/bootstrap.min.css";
+import "./../../assets/pages/css/animate.css";
+import "./../../assets/plugins/fancybox/source/jquery.fancybox.css";
+// import "./../../assets/plugins/owl.carousel/assets/owl.carousel.css";
+// import "./../../assets/pages/css/style.css";
+import "./../../assets/corporate/css/style.css";
+// import "./../../assets/pages/css/themes/red.css";
+import "./../../assets/corporate/css/custom.css";
+import Logo from "./../../assets/corporate/img/logos/logo-shop-red.png"
 const { Search } = Input;
 
 export const Header = (props) => {
@@ -75,65 +87,109 @@ export const Header = (props) => {
     />
   );
   return (
-    <div className="header">
-      <Search
-        className="input-search"
-        size="large"
-        placeholder="Tìm kiếm..."
-        onSearch={onSearch}
-        style={{ width: 400, marginTop: 5 }}
-      />
-      <div className="call">
-        <PhoneOutlined className="phone-icon" />
-        <div class="about__box-content">
-          <p>
-            Gọi mua hàng
-            <br />
-            <strong>0972495768</strong>
-          </p>
+    <div>
+      <div className="pre-header">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-6 col-sm-6 additional-nav ms-auto">
+              <ul className="list-unstyled list-inline pull-right">
+                {!isLogined ?
+                  <>
+                    <li><a onClick={openFormLogin}>Đăng nhập</a></li>
+                    <li><a onClick={openFormRegister}>Đăng ký</a></li>
+                  </> :
+                  <li>
+                    <Dropdown overlay={menu}>
+                      <Space style={{ fontWeight: "bold", paddingTop: 2 }}>
+                        {loginInfo?.username}
+                        <DownOutlined />
+                      </Space>
+                    </Dropdown>
+                  </li>
+                }
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
-      <div className="call">
-        <PhoneOutlined className="phone-icon" />
-        <div class="about__box-content">
-          <p>
-            Gọi mua hàng
-            <br />
-            <strong>0972495768</strong>
-          </p>
-        </div>
-      </div>
-      <div className="call">
-        <PhoneOutlined className="phone-icon" />
-        <div class="about__box-content">
-          <p>
-            Gọi mua hàng
-            <br />
-            <strong>0972495768</strong>
-          </p>
-        </div>
-      </div>
-      <div className="login-logout">
-        <UserOutlined className="login-logout-icon" />
-        <div class="about__box-content">
-          {isLogined ? (
-            <Dropdown overlay={menu}>
-              <Space style={{ color: "#fff", fontWeight: "bold" }}>
-                {loginInfo.username}
-                <DownOutlined />
-              </Space>
-            </Dropdown>
-          ) : (
-            <>
-              <strong onClick={openFormLogin} style={{ cursor: "pointer" }}>
-                Đăng nhập
-              </strong>
-              /
-              <strong style={{ cursor: "pointer" }} onClick={openFormRegister}>
-                Đăng ký
-              </strong>
-            </>
-          )}
+      <div className="header">
+        <div className="container">
+          <a className="site-logo" href="shop-index.html"><img src={Logo} alt="Metronic Shop UI" /></a>
+          <a href="javascript:void(0);" className="mobi-toggler"><i className="fa fa-bars" /></a>
+          {/* BEGIN CART */}
+          <div className="top-cart-block">
+            <div className="top-cart-info">
+              <a href="javascript:void(0);" className="top-cart-info-count">3 items</a>
+              <a href="javascript:void(0);" className="top-cart-info-value">$1260</a>
+            </div>
+            <i className="fa fa-shopping-cart" />
+            <div className="top-cart-content-wrapper">
+              <div className="top-cart-content">
+                <ul className="scroller" style={{ height: '250px' }}>
+                  <li>
+                    <a href="shop-item.html"><img src="assets/pages/img/cart-img.jpg" alt="Rolex Classic Watch" width={37} height={34} /></a>
+                    <span className="cart-content-count">x 1</span>
+                    <strong><a href="shop-item.html">Rolex Classic Watch</a></strong>
+                    <em>$1230</em>
+                    <a href="javascript:void(0);" className="del-goods">&nbsp;</a>
+                  </li>
+                  <li>
+                    <a href="shop-item.html"><img src="assets/pages/img/cart-img.jpg" alt="Rolex Classic Watch" width={37} height={34} /></a>
+                    <span className="cart-content-count">x 1</span>
+                    <strong><a href="shop-item.html">Rolex Classic Watch</a></strong>
+                    <em>$1230</em>
+                    <a href="javascript:void(0);" className="del-goods">&nbsp;</a>
+                  </li>
+                  <li>
+                    <a href="shop-item.html"><img src="assets/pages/img/cart-img.jpg" alt="Rolex Classic Watch" width={37} height={34} /></a>
+                    <span className="cart-content-count">x 1</span>
+                    <strong><a href="shop-item.html">Rolex Classic Watch</a></strong>
+                    <em>$1230</em>
+                    <a href="javascript:void(0);" className="del-goods">&nbsp;</a>
+                  </li>
+                  <li>
+                    <a href="shop-item.html"><img src="assets/pages/img/cart-img.jpg" alt="Rolex Classic Watch" width={37} height={34} /></a>
+                    <span className="cart-content-count">x 1</span>
+                    <strong><a href="shop-item.html">Rolex Classic Watch</a></strong>
+                    <em>$1230</em>
+                    <a href="javascript:void(0);" className="del-goods">&nbsp;</a>
+                  </li>
+                  <li>
+                    <a href="shop-item.html"><img src="assets/pages/img/cart-img.jpg" alt="Rolex Classic Watch" width={37} height={34} /></a>
+                    <span className="cart-content-count">x 1</span>
+                    <strong><a href="shop-item.html">Rolex Classic Watch</a></strong>
+                    <em>$1230</em>
+                    <a href="javascript:void(0);" className="del-goods">&nbsp;</a>
+                  </li>
+                  <li>
+                    <a href="shop-item.html"><img src="assets/pages/img/cart-img.jpg" alt="Rolex Classic Watch" width={37} height={34} /></a>
+                    <span className="cart-content-count">x 1</span>
+                    <strong><a href="shop-item.html">Rolex Classic Watch</a></strong>
+                    <em>$1230</em>
+                    <a href="javascript:void(0);" className="del-goods">&nbsp;</a>
+                  </li>
+                  <li>
+                    <a href="shop-item.html"><img src="assets/pages/img/cart-img.jpg" alt="Rolex Classic Watch" width={37} height={34} /></a>
+                    <span className="cart-content-count">x 1</span>
+                    <strong><a href="shop-item.html">Rolex Classic Watch</a></strong>
+                    <em>$1230</em>
+                    <a href="javascript:void(0);" className="del-goods">&nbsp;</a>
+                  </li>
+                  <li>
+                    <a href="shop-item.html"><img src="assets/pages/img/cart-img.jpg" alt="Rolex Classic Watch" width={37} height={34} /></a>
+                    <span className="cart-content-count">x 1</span>
+                    <strong><a href="shop-item.html">Rolex Classic Watch</a></strong>
+                    <em>$1230</em>
+                    <a href="javascript:void(0);" className="del-goods">&nbsp;</a>
+                  </li>
+                </ul>
+                <div className="text-right">
+                  <a href="shop-shopping-cart.html" className="btn btn-default">View Cart</a>
+                  <a href="shop-checkout.html" className="btn btn-primary">Checkout</a>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <Modal
@@ -153,5 +209,5 @@ export const Header = (props) => {
         <FormRegister setIsOpenFormRegister={setIsOpenFormRegister} />
       </Modal>
     </div>
-  );
+  )
 };

@@ -33,7 +33,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/product/:1" element={<ProductDetail />} />
+          {/* <Route path="/product/:1" element={<ProductDetail />} /> */}
         </Routes>
       </BrowserRouter>
     </div>
