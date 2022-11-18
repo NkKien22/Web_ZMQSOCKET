@@ -1,5 +1,12 @@
-import { Dropdown, Modal, Input, Space, Menu } from "antd";
 import { PhoneOutlined, UserOutlined, DownOutlined } from "@ant-design/icons";
+import { Dropdown, Modal, Input, Space, Menu, Badge } from "antd";
+import {
+  PhoneOutlined,
+  UserOutlined,
+  DownOutlined,
+  ShoppingCartOutlined,
+} from "@ant-design/icons";
+import "./styles.css";
 import { useState } from "react";
 import { FormLogin } from "./formLogin";
 import { FormRegister } from "./formRegister";
@@ -19,12 +26,14 @@ import "./../../assets/corporate/css/style.css";
 // import "./../../assets/pages/css/themes/red.css";
 import "./../../assets/corporate/css/custom.css";
 import Logo from "./../../assets/corporate/img/logos/logo-shop-red.png"
+import { Link } from "react-router-dom";
 const { Search } = Input;
 
 export const Header = (props) => {
-  const { loginInfo, isLogined, setDataSearch } = props;
+  const { loginInfo, isLogined, setDataSearch, countProduct } = props;
   const [isOpenFormLogin, setIsOpenFormLogin] = useState(false);
   const [isOpenFormRegister, setIsOpenFormRegister] = useState(false);
+  const countProductLocal = localStorage.getItem("COUNT_PRODUCT");
 
   const onSearch = (value) => {
     axios
@@ -33,7 +42,7 @@ export const Header = (props) => {
       )
       .then((res) => {
         setDataSearch(res.data.item);
-      })
+      });
   };
 
   const openFormLogin = () => {
@@ -192,6 +201,14 @@ export const Header = (props) => {
           </div>
         </div>
       </div>
+      <Link to="/cart" className="cart">
+        <div className="login-logout">
+          <Badge count={countProduct || countProductLocal}>
+            <ShoppingCartOutlined className="login-logout-icon" />
+          </Badge>
+          <div class="about__box-content">Giỏ hàng</div>
+        </div>
+      </Link>
       <Modal
         title="Đăng nhập"
         open={isOpenFormLogin}
