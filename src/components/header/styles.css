@@ -1,5 +1,5 @@
 .header {
-  background-color: #d70018;  
+  background: #d7abb0 !important;  
   display: flex;
   justify-content: center;
 }
@@ -37,3 +37,6 @@
   font-weight: 500;
 }
 
+.ant-input-search > .ant-input-group > .ant-input-group-addon:last-child .ant-input-search-button {
+  background: #e84d1c;
+}

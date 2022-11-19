@@ -53,6 +53,8 @@ export const ProductDetail = (props) => {
           message: "Them vào giỏ hàng thành công",
         });
       }
+    }).then(() => {
+      window.location.reload();
     });
   };
 

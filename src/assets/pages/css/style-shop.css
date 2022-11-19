@@ -177,6 +177,7 @@ Header and header elements
 	position: absolute;
 	right: -2px;
 	top: 100%;
+	height: auto;
 	z-index: 99999;
 }
 .top-cart-content {

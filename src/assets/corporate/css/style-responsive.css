@@ -666,6 +666,7 @@
 	.top-cart-content-wrapper {
 		left: 0;
 		right: auto;
+		height: auto;
 	}
 	.top-cart-content:after {
 		left: 15px;
