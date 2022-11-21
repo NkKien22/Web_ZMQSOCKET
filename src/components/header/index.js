@@ -130,7 +130,7 @@ export const Header = (props) => {
                 {countCart || 0} sản phẩm
               </a>
               <a href="javascript:void(0);" className="top-cart-info-value">
-                Tổng: {total ? formatPrice(total) : 0}
+               {total ? formatPrice(total) : 0}
               </a>
             </div>
             <i className="fa fa-shopping-cart" />

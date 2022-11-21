@@ -75,7 +75,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route
-            path="/product/:variantID"
+            path="/product/:productID"
             element={
               <ProductDetail
                 userId={loginInfo?.id}

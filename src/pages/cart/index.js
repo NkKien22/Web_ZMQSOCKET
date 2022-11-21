@@ -154,7 +154,7 @@ export const Cart = (props) => {
     const product = data
       .filter((x) => selectedRowKeys.includes(x.key))
       .map((x) => ({
-        variantID: x.key,
+        cartID: x.key,
         price: x.price,
       }));
     const payload = {
